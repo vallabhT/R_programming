@@ -299,8 +299,8 @@ prince_words_counts <- prince_words_filtered %>%
 wordcloud2(prince_words_counts[1:300,], size = 0.5)
 
 wordcloud2(prince_words_counts[1:300,],
-           figPath = "peaceAndLove.jpg",
-           size = 1.5,color = "skyblue", backgroundColor="black")
+           shape = "star",
+           size = 0.5,color = "skyblue", backgroundColor="black")
 
 letterCloud(prince_words_counts[1:300,],
             word = "Donald", size = 2)
