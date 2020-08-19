@@ -3,7 +3,9 @@ library(ggplot2)
 library(gridExtra)
 library(tidytext)
 library(wordcloud2)
-
+library(knitr)
+library(kableExtra)
+library(formattable)
 
 ##Reading the csv file
 prince_orig <- read.csv("prince_raw_data.csv",
@@ -179,11 +181,7 @@ charted_songs_over_time <- prince %>%
 
   
 #Pirnting the top songs
-library(knitr)
-install.packages("kableExtra")  
-library(kableExtra)
-install.packages("formattable")      
-library(formattable)
+
 
 prince %>%
   filter(peak == "1") %>%
@@ -264,18 +262,62 @@ full_word_count %>%
         panel.grid.minor.y = element_blank() )
 
 
+##Identifying word count per song
+full_word_count %>%
+  ggplot() +
+  geom_histogram(aes(x = num_words, fill = 
+                       char_level))+
+  ylab("Song Count") +
+  xlab("Word Count Per Song") +
+  ggtitle("Word Count Distribution") +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.title = element_blank(),
+        panel.grid.minor.y = element_blank())
+
+#TOP words
+prince_words_filtered %>%
+  count(word, sort = TRUE) %>%
+  top_n(10) %>%
+  ungroup() %>%
+  mutate(word = reorder(word,n)) %>%
+  ggplot() +
+  geom_col(aes(word,n),fill = my_color[4])+
+  theme(legend.position = "none", 
+        plot.title = element_text(hjust = 0.5),
+        panel.grid.major = element_blank()) +
+  xlab("") + 
+  ylab("Song Count") +
+  ggtitle("Most Frequently Used Words in Prince Lyrics") +
+  coord_flip()
+
+
+#Wordcloud
+
+prince_words_counts <- prince_words_filtered %>%
+  count(word,sort=TRUE)
+
+wordcloud2(prince_words_counts[1:300,], size = 0.5)
+
+wordcloud2(prince_words_counts[1:300,],
+           figPath = "peaceAndLove.jpg",
+           size = 1.5,color = "skyblue", backgroundColor="black")
+
+letterCloud(prince_words_counts[1:300,],
+            word = "Donald", size = 2)
+
+
+
+library(devtools)
+devtools::install_git("lchiffon/wordcloud2")
+
+install.Rtools()
+find_rtools()
 
 
 
 
+install.packages("git")
 
 
-
-
-
-
-
-
-
-
-
+writeLines('PATH="${RTOOLS40_HOME}\\usr\\bin;${PATH}"', con = "~/.Renviron")
+Sys.which("make")
