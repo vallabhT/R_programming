@@ -1,7 +1,10 @@
 library(rtweet)
 library(ggplot2)
 library(tidyverse)
-rt <- search_tweets("#rstats",n=1000,include_rts = FALSE)
+rt <-   get_timeline("realDonaldTrump", n = 3200)%>%
+  select(c(user_id,screen_name,text,created_at))
+
+
 users_data(rt)
 
 ts_plot(rt, "3 hours") +
@@ -39,6 +42,36 @@ rt <- search_tweets("",n=18000,geocode=melb)
 rt <- rt%>%
   select(c(user_id,screen_name,text,source,hashtags,lang,place_name,
            place_full_name,geo_coords,coords_coords,bbox_coords))
-write_as_csv(rt,file_name = "tweet.csv")
+write_as_csv(rt,file_name = "tweetdtrump.csv")
+
+djt <- search_tweets(q = "realdonaldtrump", n = 10000) %>%
+  select(c(user_id,screen_name,text,created_at))
+as.Date(rt$created_at)
+
+
+trump1 <- read.csv(file = file.choose())
+
+trump2 <- read.csv(file = file.choose())
+
+trump3 <- read.csv(file = file.choose())
+
+length(trump1$tweet)
+length(trump2$tweet)
+
+
+mode(trump1)
+mode(trump2)
+
+finaltrump <- bind_rows(trump1,trump2)
+
+write_as_csv(finaltrump,file_name = "trumptwitter_dataset.csv")
+
+
+
+
+
+
+
+
 
 
