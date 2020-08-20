@@ -298,17 +298,17 @@ prince_words_counts <- prince_words_filtered %>%
 
 wordcloud2(prince_words_counts[1:300,], size = 0.5)
 
-wordcloud2(prince_words_counts[1:300,],
-           shape = "star",
-           size = 0.5,color = "skyblue", backgroundColor="black")
+wordcloud2(prince_words_counts,
+           figPath = "",
+           size = 1,color = "orange")
 
-letterCloud(prince_words_counts[1:300,],
-            word = "Donald", size = 2)
+letterCloud(prince_words_counts,
+            word = "DONALD", size = .5)
 
 
 
 library(devtools)
-devtools::install_git("lchiffon/wordcloud2")
+devtools::install_github("lchiffon/wordcloud2")
 
 install.Rtools()
 find_rtools()
