@@ -7,6 +7,21 @@ library(knitr)
 library(kableExtra)
 library(formattable)
 
+library(devtools)
+devtools::install_github("lchiffon/wordcloud2")
+
+# install.Rtools()
+# find_rtools()
+# 
+# 
+# 
+# 
+# install.packages("git")
+
+
+writeLines('PATH="${RTOOLS40_HOME}\\usr\\bin;${PATH}"', con = "~/.Renviron")
+Sys.which("make")
+
 ##Reading the csv file
 prince_orig <- read.csv("prince_raw_data.csv",
                         stringsAsFactors = FALSE)
@@ -307,17 +322,3 @@ letterCloud(prince_words_counts,
 
 
 
-library(devtools)
-devtools::install_github("lchiffon/wordcloud2")
-
-install.Rtools()
-find_rtools()
-
-
-
-
-install.packages("git")
-
-
-writeLines('PATH="${RTOOLS40_HOME}\\usr\\bin;${PATH}"', con = "~/.Renviron")
-Sys.which("make")

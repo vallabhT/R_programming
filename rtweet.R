@@ -70,8 +70,20 @@ write_as_csv(finaltrump,file_name = "trumptwitter_dataset.csv")
 
 
 
+finaltrump$tweet <- fix.contractions(finaltrump$tweet)
+
+
+finaltrump$tweet <- sapply(finaltrump$tweet,removeSpecialChars)
+
+
+finaltrump$tweet <- sapply(finaltrump$tweet,tolower)
 
 
 
+as.numeric(finaltrump$created_at)
 
+mode(finaltrump$created_at[5000])
 
+as.Date(finaltrump$created_at, "%Y/%m/%d %H:%M")
+
+mode(rt$created_at[32])
