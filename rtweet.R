@@ -87,3 +87,5 @@ mode(finaltrump$created_at[5000])
 as.Date(finaltrump$created_at, "%Y/%m/%d %H:%M")
 
 mode(rt$created_at[32])
+
+typeof(rt$created_at)
