@@ -62,7 +62,7 @@ length(trump2$tweet)
 mode(trump1)
 mode(trump2)
 
-finaltrump <- bind_rows(trump1,trump2)
+finaltrump <- bind_rows(trump1,trump2,trump3)
 
 write_as_csv(finaltrump,file_name = "trumptwitter_dataset.csv")
 
@@ -89,3 +89,19 @@ as.Date(finaltrump$created_at, "%Y/%m/%d %H:%M")
 mode(rt$created_at[32])
 
 typeof(rt$created_at)
+
+
+
+
+str(trump1)
+
+
+str(trump2)
+
+str(trump3)
+
+finaltrump <- rbind(trump3, trump2, trump1)
+
+write_as_csv(finaltrump,file_name = "trumptwitter_dataset.csv")
+
+
