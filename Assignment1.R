@@ -30,12 +30,13 @@ package.check <- lapply(packages, FUN = function(x){
 # The datasets have been formatted and binded for further use in the assignment
 # The sentiment data set is taken from tidytex package, using the function
 # get_sentiment("nrc")
+# Extract the dataset folder from the zip file, update the path if needed
 
-trump_data <- read.csv(file = 'trump_twitter_dataset.csv')
+trump_data <- read.csv(file = 'Datasets/Datasets/trump_twitter_dataset.csv')
 
 # Reading dataset which consists of NRC sentiments
 
-sentiments <- read.csv(file = 'sentiments.csv')
+sentiments <- read.csv(file = 'Datasets/Datasets/sentiments.csv')
 
 #Checking the structure of the dataset
 
@@ -114,11 +115,6 @@ total_sentiment_position <- trump_data_nrc %>%
 
 # Visualising using Radar Chart -------------------------------------------
 
-#Creating a color matrix, it consist of RGB value of red and green color
-
-col_matrix <- matrix(c(255,0,0,0,255,0),
-                     byrow = F, nrow = 3)
-
 # Generating the percentage of each sentiment over the position
 
 position_radar_chart <- sentiment_nrc %>%
@@ -128,9 +124,9 @@ position_radar_chart <- sentiment_nrc %>%
   inner_join(total_sentiment_position, by = "position") %>%
   
   #Filtering out sentiments which have low usage,
-  #It can be commented out, to get a graph with all the senitments
+  #It can be commented out, to get a graph with all the sentiments
   
-  filter(! sentiment %in%  c("Sadness","Disgust","Anger","Trust",
+  filter(! sentiment %in%  c("Sadness","Disgust","Anger",
                              "Anticipation")) %>%
   
   # Calculating the percentage of each sentiment over the position
@@ -148,7 +144,9 @@ position_radar_chart <- sentiment_nrc %>%
                main = "Sentiments of Tweets by Donald Trump",
                polyAlpha = 0.1, 
                lineAlpha = 2, 
-               maxScale = 30,colMatrix = col_matrix)
+               maxScale = 30,colMatrix = matrix(c(255,139, 125 , 0, 255, 255),
+                                                byrow = F, nrow = 3),
+               scaleStepWidth = 5)
 
 #Plotting the graph
 
