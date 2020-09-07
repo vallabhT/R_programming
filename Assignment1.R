@@ -141,7 +141,7 @@ position_radar_chart <- sentiment_nrc %>%
   #Creating the radar chart, using pre-defined color matrix
   
   chartJSRadar(showToolTipLabel = TRUE,
-               main = "Sentiments of Tweets by Donald Trump",
+               main = "Change in sentiments of tweets by Donald Trump",
                polyAlpha = 0.1, 
                lineAlpha = 2, 
                maxScale = 30,colMatrix = matrix(c(255,139, 125 , 0, 255, 255),
